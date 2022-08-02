@@ -1,0 +1,16 @@
+{% extends "storefront/layout/meta.html.twig" %} {% block layout_head_inner %}
+<head>
+    {{
+        parent()
+    }}
+    {% block fontawesom_icons %}
+    <link
+        rel="stylesheet"
+        href="{{
+            asset('/bundles/sixteenclothing/assets/fontawesome/css/all.min.css')
+        }}"
+    />
+    
+    {% endblock %}
+</head>
+{% endblock %}

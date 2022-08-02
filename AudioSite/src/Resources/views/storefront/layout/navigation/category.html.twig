@@ -1,0 +1,9 @@
+{% extends "storefront/layout/navigation/navigation.html.twig" %} {% block
+layout_main_navigation %}
+<div class="border rounded Category1">
+    <h3 class="border p-2 text-center">Category &#8964;</h3>
+    {% block layout_main_navigation_menu_items %}
+    {{ parent() }}
+    {% endblock %}
+</div>
+{% endblock %}

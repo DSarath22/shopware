@@ -1,0 +1,11 @@
+{% extends "storefront/section/cms-section-block-container.html.twig" %} {%
+block section_content_block_container %}
+<div
+    class="cms-block-container products"
+    style="{% if padding %}padding: {{ padding }};{% endif %}"
+>
+    {% block section_content_block_row %}
+    {{ parent() }}
+    {% endblock %}
+</div>
+{% endblock %}

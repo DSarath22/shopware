@@ -1,0 +1,12 @@
+{% extends "storefront/component/buy-widget/buy-widget.html.twig" %} {% block
+buy_widget %} {% block buy_widget_price %}
+<div class="product-detail-price-container pt-3">
+    {% sw_include
+    '@Storefront/storefront/component/buy-widget/buy-widget-price.html.twig' %}
+</div>
+{% endblock %} {% block buy_widget_reviews %}
+{{ parent() }}
+{% endblock %} {% block buy_widget_buy_form %}
+{{ parent() }}
+{% endblock %} {% block buy_widget_wishlist %} {{ parent() }} {% endblock %} {%
+endblock %}

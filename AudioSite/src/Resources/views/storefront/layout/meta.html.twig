@@ -1,0 +1,24 @@
+{% extends "storefront/layout/meta.html.twig" %} {% block layout_head_inner %}
+<head>
+    {{
+        parent()
+    }}
+    {% block fontawesom_icons %}
+    <link
+        rel="stylesheet"
+        href="{{
+            asset('/bundles/audiosite/assets/fontawesome/css/all.min.css')
+        }}"
+    />
+    {% endblock %} {% block bootstrap_css %}
+    <link
+        rel="stylesheet"
+        href="{{
+            asset('/bundles/audiosite/assets/fontawesome/css/bootstrap.min.css')
+        }}"
+    />
+    {% endblock %}
+    <script src="/bundles/audiosite/assets/js/bootstrap.min.js"></script>
+    <script src="/bundles/audiosite/assets/js/index.js"></script>
+</head>
+{% endblock %}

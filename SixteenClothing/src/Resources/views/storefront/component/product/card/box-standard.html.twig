@@ -1,0 +1,85 @@
+{% extends "storefront/component/product/card/box-standard.html.twig" %} {%
+block component_product_box %} {% if product %} {% set name =
+product.translated.name %} {% set id = product.id %} {% set cover =
+product.cover.media %} {% set variation = product.variation %} {#
+{{ dump(product) }} #}
+<div class="card product-box box-{{ layout }} rounded-0 heht">
+    <div class="card-body p-0 m-0">
+        {% block component_product_box_badges %}
+        <div class="product-image-wrapper">
+            <a
+                class="text-decoration-none"
+                href="{{ seoUrl('frontend.detail.page', { productId: id }) }}"
+            >
+                <img
+                    src="{{ product.cover.media.url }}"
+                    alt="sarath"
+                    class="img-fluid p-0 m-0 w-100"
+                />
+            </a>
+        </div>
+        {% endblock %} {% block component_product_box_info %}
+        <div class="product-info pl-4 pr-4 pt-2 pb-2">
+            <div class="pb-3 d-flex justify-content-between">
+                <h4 class="text-primary">
+                    <a
+                        class="text-decoration-none"
+                        href="{{
+                            seoUrl('frontend.detail.page', { productId: id })
+                        }}"
+                    >
+                        {{ product.translated.name }}
+                    </a>
+                </h4>
+                {#
+                <h4>$25.75</h4>
+                #} {% block component_product_box_price %} {% sw_include
+                '@Storefront/storefront/component/product/card/price-unit.html.twig'
+                %}{% endblock %}
+            </div>
+            <p class="pb-3">
+                {{ product.translated.description }}
+            </p>
+            {% block component_product_box_rating %} {% if
+            config('core.listing.showReview') %}
+
+            <div class="product-rating">
+                {% if product.ratingAverage %} {% sw_include
+                '@Storefront/storefront/component/review/rating.html.twig' with
+                { points: product.ratingAverage, style: 'text-primary' } %} {%
+                endif %}
+            </div>
+            {% endif %} {% endblock %} {% block component_product_box_action %}
+            {% sw_include
+            '@Storefront/storefront/component/product/card/action.html.twig' %}
+            {% endblock %}{#
+            <div class="product-rating">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <i class="fa-solid fa-star clr"></i>
+                        <i class="fa-solid fa-star clr"></i>
+                        <i class="fa-solid fa-star clr"></i>
+                        <i class="fa-solid fa-star clr"></i>
+                        <i class="fa-solid fa-star clr"></i>
+                    </div>
+                    <div>
+                        <p class="reviews">Reviews (24)</p>
+                    </div>
+                </div>
+            </div>
+            #}
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endif %} {% endblock %} {# {% block component_product_box_image %}
+<div class="product-image-wrapper">
+    <img
+        src="{{
+            asset('/bundles/sixteenclothing/assets/images/product_01.jpg')
+        }}"
+        alt="sarath"
+        class="img-fluid p-0 m-0 w-100"
+    />
+</div>
+{% endblock %} #}

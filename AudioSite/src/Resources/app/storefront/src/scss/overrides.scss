@@ -1,0 +1,370 @@
+/*
+Override variable defaults
+==================================================
+This file is used to override default SCSS variables from the Shopware Storefront or Bootstrap.
+
+Because of the !default flags, theme variable overrides have to be declared beforehand.
+https://getbootstrap.com/docs/4.0/getting-started/theming/#variable-defaults
+*/
+body {
+    overflow-x: hidden;
+}
+
+.top-bar-nav {
+    display: flex;
+    justify-content: flex-start !important;
+    margin-left: 5em;
+
+}
+
+.top-bar-nav-text {
+    color: white;
+}
+
+.header-actions-btn .icon {
+
+    color: white;
+}
+
+.header-cart-icon {
+    border: 1px solid #2fb991;
+    background-color: #2fb991;
+    padding: 1em 0.6em;
+    border-radius: 10px;
+}
+
+.top-bar {
+    background-color: #2fb991;
+}
+
+.account-menu {
+    margin-right: 5em;
+    color: white;
+}
+
+.header-main .container {
+    padding: 0px;
+    margin: 0px;
+}
+
+.header-main .header-row {
+    margin-top: 2em;
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
+.header-main .header-logo-col {
+    padding: 0px;
+    margin: 0px;
+}
+
+.header-search-btn {
+    border: 1px solid #2fb991 !important;
+    background-color: #2fb991 !important;
+    color: white;
+}
+
+.header-search-btn .icon-search {
+    color: white;
+}
+
+.footer-main {
+    background-color: #2d2d2d;
+    color: #6e6e6e;
+}
+
+.footer-main {
+    // display: flex;
+    justify-content: space-evenly;
+    padding-right: 5em;
+    padding-left: 5em;
+}
+
+.footer-font-icon {
+    top: 13px;
+    right: 20px;
+}
+
+.footer-font-icon .fa-paper-plane {
+    color: #2fb991;
+}
+
+.footer-column .social-icons {
+    height: 35px;
+    width: 35px;
+    margin-top: 0.5em;
+    background-color: #e7e7e7;
+    margin-right: 0.5em;
+    margin-left: 13px;
+}
+
+.fb-icon {
+    font-size: 1.8em !important;
+}
+
+.footer-division-2 {
+    border-top: 1px solid black;
+    margin-bottom: 2em;
+}
+
+.footer-div-3 {
+    border-top: 1px solid black;
+}
+
+.footer-div-icon {
+    color: #2fb991;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+
+.copyrights {
+    margin: 3.5em 0em;
+    color: #bababa !important;
+}
+
+.copyrights>li {
+    font-size: 2em;
+}
+
+.main-navigation {
+    margin-top: 2em;
+}
+
+.footer-headline {
+    color: white !important;
+}
+
+.main-navigation-menu {
+    display: none !important;
+}
+
+.show-menu {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.nav-main {
+    margin-left: 4em;
+    margin-right: 4em;
+    padding: 0px;
+}
+
+.hoverAction {
+    background-color: #2fb991;
+    color: white;
+    padding: 0.8em 1.2em;
+    border: 1px solid #2fb991;
+    border-radius: 2px;
+}
+
+.displayy {
+    z-index: 9999;
+}
+
+
+.img-slider-caro {
+    padding-left: 5.5em !important;
+    padding-right: 5.5em !important;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+.product-price-info {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.product-price-unit {
+    height: 0px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.product-cheapest-price {
+    min-height: 0px !important;
+    margin: 0px;
+    padding: 0px;
+}
+
+.product-name {
+    margin-bottom: 0px !important;
+}
+
+.cms-element-product-box {
+    text-align: center;
+}
+
+.product-image.is-standard {
+    object-fit: cover !important;
+}
+
+.product-box {
+    min-height: 355px;
+}
+
+.products .col-md-4 {
+    padding: 0px !important;
+}
+
+.products .col-12 {
+    padding: 0px !important;
+}
+
+
+.side-product {
+    border: 1px solid #bababa;
+}
+
+.product-detail-media {
+    padding: 0px !important;
+}
+
+.cms-row .col-md-6 {
+    padding: 0px !important;
+    gap: 1px;
+}
+
+.blog .cms-section-default {
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -20px;
+    margin-left: -20px;
+    padding: 0px !important;
+}
+
+.blog {
+    margin: 2em;
+}
+
+.cms-section-sidebar .cms-section-sidebar-main-content {
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -20px;
+    margin-left: -20px;
+    padding: 0px !important;
+}
+
+.cms-section-sidebar-sidebar-content{
+    margin:0em 2em 0em 0.5em !important;
+}
+.cms-block-image-two-column{
+    padding:0px !important;
+}
+.underline-effect,a:hover{
+    border-bottom: 1.5px solid #2fb991;
+    color:#000;
+}
+.btn-buy{
+    background-color: #2fb991 !important;
+    border: 1px solid #2fb991 !important;
+}
+.product-detail-price{
+    font-size:1.8em !important;
+}
+.cms-block-text-teaser{
+    padding:0px !important;
+}
+.product-name{
+    height:20px !important;
+}
+
+.cms-image{
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.bg-image:hover img{
+    transform: scale(1.2);
+    transition: all .5s ease;
+}
+.carousel-caption{
+    top:150px !important;
+}
+.slider1 .btn{
+    background-color: #2fb991;
+    color:white;
+    border:2px solid #2fb991;
+    
+}
+.slider1 h2{
+    font-size: 3em !important;
+}
+
+.category1, h3{
+    background-color: #2fb991 !important;
+    color: white !important;
+}
+.banner-3 .cms-image-container:hover{
+    border:0.5px solid black;
+}
+.banner-4 .cms-image-container:hover{
+    border:0.5px solid black;
+}
+#cms-image-1:hover{
+    border: 10px solid white;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.menu-button .header-actions-btn{
+    background-color: #000 !important;
+}
+
+@media (min-width: 576px) {
+    .header-search {
+        margin: 0px;
+    }
+}
+@media only screen and (max-width: 768px){
+    body{
+        overflow-x: hidden !important;
+    }
+    .header-main .header-row {
+        margin-top: 2em;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+    .img-slider-caro {
+        padding-left: 1em !important;
+        padding-right: 1em !important; 
+    }
+    .cms-section-sidebar-sidebar-content{
+        margin:0em !important;
+    }
+    .cms-section-sidebar{
+        margin: 0em !important;
+        padding-left: 0em !important;
+        padding-right: 0em !important;
+    }
+    .cms-row{
+        margin:0em !important;
+    }
+    .cms-section-sidebar .cms-section-sidebar-main-content{
+        margin:0em !important;
+    }
+    .sf-minitoolbar{
+        display:none !important;
+    }
+    .img-slider-caro{
+        margin:0em !important;
+    }
+    .footer-div{
+        display:flex;
+        flex-direction: column;
+    }
+    
+}

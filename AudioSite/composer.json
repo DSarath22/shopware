@@ -1,0 +1,18 @@
+{
+  "name": "swag/theme-skeleton",
+  "description": "Theme skeleton plugin",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "AudioSite\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "AudioSite\\AudioSite",
+    "label": {
+      "de-DE": "Theme AudioSite plugin",
+      "en-GB": "Theme AudioSite plugin"
+    }
+  }
+}

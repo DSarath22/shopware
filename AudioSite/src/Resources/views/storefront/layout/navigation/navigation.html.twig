@@ -1,0 +1,15 @@
+{% extends "storefront/layout/navigation/navigation.html.twig" %} {% block
+layout_main_navigation_menu %}
+<div class="position-relative">
+    <div class="d-flex justify-content-between border rounded">
+        <div class="displayy">
+            <button class="hoverAction" onclick="myFunction()">
+                Catagories
+                <span><i class="fa-solid fa-circle-chevron-down"></i></span>
+            </button>
+            {% block layout_main_navigation_menu_home %} {% endblock %}
+            {{ parent() }}
+        </div>
+    </div>
+</div>
+{% endblock %}
