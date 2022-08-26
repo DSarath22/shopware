@@ -1,0 +1,18 @@
+{
+  "name": "cgs/audio-site",
+  "description": "audio site plugin",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Cgs\\AudioSite\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "Cgs\\AudioSite\\CgsAudioSite",
+    "label": {
+      "de-DE": "audio site plugin",
+      "en-GB": "audio site plugin"
+    }
+  }
+}

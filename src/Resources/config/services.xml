@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Cgs\AudioSite\Storefront\Controller\JobController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+        <service id="Cgs\AudioSite\Storefront\Controller\TestController" public="true">
+        <argument type="service" id="Cgs\AudioSite\Storefront\Page\TestCustom\TestPageLoader" /> 
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+        <service id="Cgs\AudioSite\Core\Content\MyTest\MyTestDefinition" public="true">
+            <tag name="shopware.entity.definition" entity="cgs_audio_site" />
+        </service>
+        <service id="Cgs\AudioSite\Storefront\Page\TestCustom\TestPageLoader" public="true">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader" />
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="customer.repository" />   
+            <argument type="service" id="Cgs\AudioSite\Service\TestDataService" />
+        
+        </service>
+        <service id="Cgs\AudioSite\Service\TestDataService" public="true">
+            <argument type="service" id="cgs_audio_site.repository" />
+        </service>
+        <service id="Cgs\AudioSite\Subscriber\CgsAudioSiteSubscriber" public="true">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="order_customer.repository" />
+        </service>
+        <service id="Cgs\AudioSite\Core\Checkout\Cart\PriceOverwrite">
+            <!-- <argument type="service" id="Cgs\AudioSite\Core\Checkout\Cart" /> -->
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator" />
+            <!-- <argument type="service" id="product.repository" /> -->
+            <tag name="shopware.cart.processor" priority="4500" />
+            <tag name="shopware.cart.collector" priority="4500" />
+        </service>
+    </services>
+</container>

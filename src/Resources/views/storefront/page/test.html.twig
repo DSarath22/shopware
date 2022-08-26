@@ -1,0 +1,84 @@
+ {% sw_extends
+'@Storefront/storefront/page/account/_page.html.twig' %} {% block
+page_account_main_content %} {% set customers=page.customer.elements %} 
+<div class="d-flex flex-column justify-content-center mt-5">
+  <form class="text-start register-form" method="post" novalidate data-form-validation="true" action="{{ path('frontend.save.data')}}">
+    {{ sw_csrf('frontend.save.data') }}
+    <div class="form-group">
+        <label class="h5 form-label" for="sel1">Select a Customer:</label>
+        <select class="custom-select" name="customerId" required id="sel1" data-initial-customer-id>
+          <option disabled="disabled"
+              value=""
+              selected="selected">
+              please select customer
+              </option>         
+            {% for  customer in customers %}           
+            <option id="slct" value="{{customer.id}}" data-vat-id-required>{{ customer.firstName }} {{ customer.lastName }}</option>            
+            {% endfor %}            
+        </select>
+    <div class="d-flex justify-content-start mt-3 form-group">
+      <h5 class="mr-3">Select Status:</h5>
+      <div class="form-check mr-3">
+        <input
+          type="radio"
+          class="form-check-input"
+          id="radio1"
+          name="status"
+          value="checkedIn"
+          checked
+        />
+        <label class="form-check-label" for="radio1">CheckedIn</label>
+      </div>
+      <div class="form-check">
+        <input
+          type="radio"
+          class="form-check-input"
+          id="radio2"
+          name="status"
+          value="CheckedOut"
+        />
+        <label class="form-check-label" for="radio2">CheckedOut</label>
+      </div>
+    </div>
+    
+    <div class="form-group">
+        <button class="bg-success btn m-2 rounded text-white" type="submit">
+          Submit
+        </button>
+    </div>
+  </form>
+</div>
+{# {{ dump(customerList) }} #}
+{% block customerTable %}
+<h2 class="text-center">Customer lists</h2>
+<table class="border">
+  <thead>
+    <tr class="border text-center text-uppercase">
+      <th class="border">ID</th>
+      <th class="border">CustomerId</th>
+      <th class="border">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set customerData=customerList.entities.elements %}
+      {# {{ dump(customerData) }} #}
+      {% for  customerDatas in customerData %} 
+      {% set statusUpdate="checkedOut" %}
+      {% if customerDatas.status===true %}
+        {% set statusUpdate="checkedIn" %}
+      {% endif %}
+    <tr class="border text-capitalize">      
+        <td class="border">{{customerDatas.id}}</td>  
+        <td class="border">{{customerDatas.customerId}}</td> 
+        <td class="border">{{statusUpdate}}</td> 
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+{% endblock %}
+
+
+
+
+
