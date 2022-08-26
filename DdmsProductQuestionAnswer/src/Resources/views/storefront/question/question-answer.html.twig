@@ -1,0 +1,209 @@
+{% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
+
+{% block ddms_question %}
+    {% block utilities_offcanvas_content %}
+        {% block page_product_detail_question_container %}
+            <div id="app">                
+                {% block ddms_question_answer_message %}
+                   {% sw_include '@Webkul/storefront/question/question-answer-message.html.twig' %}  
+                {% endblock %}
+                
+                
+                {% block ddms_question_list_and_answer %}
+                    <div>
+                        {% sw_include '@Webkul/storefront/question/question-list.html.twig' %}
+                    </div>
+                {% endblock %}  
+                
+                <button type="button" class="btn btn-primary question-form-btn" id="ask-question-button"
+                data-toggle="collapse"
+             
+                {% if context.customer %}
+                    data-target="#ask-question"
+                    title='{{"question-answer.product-detail.formQuestion.textFormLogin"|trans}}'
+                {% else %}
+                    title='{{"question-answer.product-detail.formQuestion.requiredLogin"|trans}}'
+                {% endif %}
+                aria-expanded="false"
+                aria-controls="review-form review-list"
+                >
+                    {% if context.customer %}
+                        {{"question-answer.product-detail.formQuestion.textFormLogin"|trans}}
+                    {% else %}
+                        {{"question-answer.product-detail.formQuestion.requiredLogin"|trans}}
+                    {% endif %}
+                </button>
+                
+                {% block ddms_question_form %}
+                    {% sw_include '@Webkul/storefront/question/question-form.html.twig' %}              
+                {% endblock %}
+            </div>
+        {% endblock %}
+         
+        <script type="text/javascript">
+            (() => {
+                Vue.use(VueRouter)
+                Vue.component('paginate', VuejsPaginate)
+                Vue.use(VueLoading);
+                Vue.component('loading', VueLoading);
+
+                const router = new VueRouter({
+                })
+
+                new Vue({
+                    router,
+                    el: '#app',
+
+                    data: function () {
+                        return {
+                            'limit': 5 ,
+                            'pageCount': 0,
+                            'answerPageCount': 0,
+                            'questionAnswer': [],
+                            'page': this.$route.query.page ? parseInt(this.$route.query.page) : 1,
+                            'answerPage': this.$route.query.answerPage ? parseInt(this.$route.query.answerPage) : 1,
+                        }
+                    },
+
+                    mounted: function () {
+                        this.getQuestionAnswer();
+                    },
+
+                    watch: {
+                        '$route.query.page': function (newValue, oldValue) {
+                           this.getQuestionAnswer();
+                        },
+
+                        '$route.query.answerPage': function (newValue, oldValue) {
+                            this.getQuestionAnswer();
+                        }
+                    },
+
+                    methods: {
+                        submitAnswer: function(questionId) {
+                            let answerLoader = this.$loading.show({
+                                loader: 'spinner',
+                                color: '#cce3fb'
+                            });
+                               
+                            let url =`{{ url('frontend.home.page') }}qa/product/answer`
+                            var answerId = 'answerDetail'+questionId;
+                            var customerId = `{{context.customer.id}}`;
+                            var productId = `{{page.product.id}}`;
+    
+                            var answer = '';
+
+                            var answer = document.getElementById(answerId).value;
+                                                                        
+                            axios.post(url, {
+                                questionId: questionId,
+                                answer: answer
+                            }).then(response => {
+                                answerLoader.hide();
+                                document.getElementById('autoAnswerMessage').style.display = 'none';
+                                document.getElementById('answerMessage').style.display='none';
+                                document.getElementById('errorName').style.display='none';
+                                document.getElementById('errorEmail').style.display='none';
+                                document.getElementById('errorAnswer').style.display='none';
+                                document.getElementById('errorInvalidEmail').style.display='none';
+                                document.getElementById('errorAnswerLimit').style.display='none';
+                                $("#answer"+questionId).collapse('hide');
+                                if (!response.data.error) {
+                                    document.getElementById(answerId).value = '';
+
+                                    if (response.data.status) {
+                                        document.getElementById('autoAnswerMessage').style.display = 'block';
+                                    } else {
+                                        document.getElementById('answerMessage').style.display='block';
+                                    }  
+                                    this.getQuestionAnswer();                                 
+                                } else {
+                                    if (response.data.errorName == 'answer') {
+                                        document.getElementById('errorAnswer').style.display='block';
+                                    }else if (response.data.errorName == 'answer-limit') {
+                                        document.getElementById('errorAnswerLimit').style.display='block';
+                                    }
+                                }                                               
+                            });
+                                
+                            
+                        },
+
+                        submitQuestion: function() {
+                            let questionLoader = this.$loading.show({
+                                loader: 'spinner',
+                                color: '#cce3fb'
+                            });
+
+                            let url =`{{ url('frontend.home.page') }}qa/product/question`
+                            var customerId = `{{context.customer.id}}`;
+                            var productId = `{{page.product.id}}`;
+
+                            var question = document.getElementById('question').value;
+                            var formData = new FormData();
+                            formData.append('question', question);
+                            formData.append('productId', productId);
+                           
+                            axios.post(url, formData, {
+                                headers: {
+                                'Content-Type': 'multipart/form-data'
+                                }
+                            }).then(response => {
+                                questionLoader.hide();
+                                document.getElementById('autoQuestionMessage').style.display = 'none';
+                                document.getElementById('questionMessage').style.display='none';
+                                document.getElementById('errorName').style.display='none';
+                                document.getElementById('errorEmail').style.display='none';
+                                document.getElementById('errorQuestion').style.display='none';
+                                document.getElementById('errorInvalidEmail').style.display='none';
+                                document.getElementById('errorImage').style.display="none";
+                                document.getElementById('errorQuestionLimit').style.display="none";
+                                document.getElementById('errorQuestionDetailLimit').style.display="none";
+                                $(".ask-question").collapse('hide');
+                                if (!response.data.error) {
+                                    document.getElementById('question').value = '';
+                                    this.getQuestionAnswer();                              
+                                } else {
+                                    if (response.data.errorName == 'question') {
+                                        document.getElementById('errorQuestion').style.display='block';
+                                    } else if (response.data.errorName == 'question-limit') {
+                                        document.getElementById('errorQuestionLimit').style.display="block";
+                                    }
+                                }
+                                
+                            });                      
+                        },
+
+                        getQuestionAnswer: function () {
+                            let questionAnswerLoader = this.$loading.show({
+                                loader: 'spinner',
+                                color: '#cce3fb'
+                            });
+                            let actionUrl = `{{ url('frontend.home.page') }}qa/question/list/{{ page.product.id }}?page=${this.page}&limit=${this.limit}&answerPage=${this.answerPage}`
+
+                            axios.post(actionUrl)
+                            .then(response => {
+                                this.questionAnswer = response.data.list;
+                                this.pageCount = response.data.total;
+                                questionAnswerLoader.hide();
+                            })
+                            .catch(error => {
+                            })
+                        },
+
+                        paginate: function () {
+                            this.$router.push({ query: { page: this.page }})
+                        },
+
+                        answerPaginate: function () {
+                            this.$router.push({ query: { answerPage: this.answerPage }})
+                        }
+                    },
+                    
+                    delimiters: ['~', '~']
+                })
+
+            })()   
+        </script>
+    {% endblock %}
+{% endblock %}

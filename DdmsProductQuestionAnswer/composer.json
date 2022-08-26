@@ -1,0 +1,24 @@
+{
+    "name": "ddms/question-answer",
+    "description": "It allows the users to post questions for products and get answers.",
+    "version": "v1.0.",
+    "type": "shopware-platform-plugin",
+    "require": {
+        "shopware/core": "*",
+        "shopware/administration": "*",
+        "shopware/storefront": "*"
+    },
+    "extra": {
+        "plugin-icon": "src/Resources/config/plugin.png",
+        "shopware-plugin-class": "Ddms\\ProductQuestionAnswer\\DdmsProductQuestionAnswer",
+        "label": {
+            "de-DE": "Produkt Frage Antwort",
+            "en-GB": "Product Question Answer"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Ddms\\ProductQuestionAnswer\\": "src/"
+        }
+    }
+}

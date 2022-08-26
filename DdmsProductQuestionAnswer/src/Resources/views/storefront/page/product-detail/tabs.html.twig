@@ -1,0 +1,36 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/tabs.html.twig' %}
+
+{% block page_product_detail_tabs_navigation_review %}
+    {{parent()}}
+    {% block page_product_detail_tabs_navigation_question %}
+        <li class="nav-item">
+            <a class="nav-link {% if (ratingSuccess == 1) or (ratingSuccess == -1) %}active{% endif %} product-detail-tab-navigation-link"
+                id="question-tab"
+                data-toggle="tab"
+                data-offcanvas-tabs="true"
+                href="#question-tab-pane"
+                role="tab"
+                aria-controls="question-tab-pane"
+                aria-selected="true">
+                {{ "question-answer.product-detail.tabQuestion"|trans}}
+                <span class="product-detail-tab-navigation-icon">
+                    {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                </span>
+            </a>
+        </li>
+    {% endblock %}
+{% endblock %}
+
+{% block page_product_detail_tabs_content_review %}
+    {{parent()}}
+    {% block page_product_detail_tabs_content_question %}
+        <div class="tab-pane fade show {% if (ratingSuccess == 1) and (ratingSuccess == -1) %}active{% endif %}"
+            id="question-tab-pane"
+            role="tabpanel"
+            aria-labelledby="question-tab">
+            
+        {% sw_include '@Storefront/storefront/question/question-answer.html.twig' %}
+        </div>
+    {% endblock %}
+    
+{% endblock %}

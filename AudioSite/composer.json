@@ -1,6 +1,7 @@
 {
   "name": "swag/theme-skeleton",
   "description": "Theme skeleton plugin",
+  "version": "1.0.0",
   "type": "shopware-platform-plugin",
   "license": "MIT",
   "autoload": {
@@ -14,5 +15,8 @@
       "de-DE": "Theme AudioSite plugin",
       "en-GB": "Theme AudioSite plugin"
     }
+  },
+  "require": {
+    "shopware/core": "^6.2"
   }
 }

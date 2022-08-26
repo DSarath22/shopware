@@ -1,0 +1,184 @@
+{% block ddms_question_list %}
+    <sw-page class="ddms-question-list">
+        {% block ddms_question_list_grid_columns_search_bar %}
+            <template #search-bar>
+                <sw-search-bar :initialSearchType="$tc('qa.general.searchQuestionTitle')"
+                :initialSearch="term"
+                @search="onSearch">
+                </sw-search-bar>
+            </template>
+        {% endblock %}
+        {% block ddms_question_list_smart_bar_header %}
+            <template #smart-bar-header>
+                {% block ddms_question_list_smart_bar_header_title %}
+                    <h2>
+                        {% block ddms_question_list_smart_bar_header_title_text %}
+                            {{ $tc('sw-settings.index.title') }} <sw-icon name="small-arrow-medium-right" small></sw-icon> 
+                            {{$tc('qa.question.list.textQuestion')}}
+                        {% endblock %}
+
+                        {% block ddms_question_list_smart_bar_header_amount %}
+                            <span v-if="!isLoading">
+                                ({{ total }})
+                            </span> 
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        <template #content>
+            {% block ddms_question_list_content %}
+                <div>
+                    {% block wk_question_detail_modal %}
+                        <sw-modal v-if="question" variant="small" @modal-close="cancel" :title="$tc('qa.question.list.columnQuestion')">
+                            {{question}}
+                        </sw-modal> 
+                    {% endblock %}
+                    {% block ddms_question_list_grid %}
+                        <sw-entity-listing
+                            :isLoading="isLoading"
+                            v-if="questions"
+                            :items="questions"
+                            :columns="questionColumns"
+                            :repository="questionRepository"
+                            detailRoute="ddms.question.detail"
+                            :showSelection="true">
+                            
+                            {% block qa_question_list_grid_column_question %}
+                                <template #column-question="{ item }">
+                                    <div v-if="item.question" v-on:click="openModal(item.question)" :title="$tc('qa.question.list.titleToviewDetail')" class="question-detail">
+                                        {{ item.question }}
+                                    </div>
+                                    <div v-else>
+                                        {{ item.question }}
+                                    </div>                                   
+                                    
+                                    <template v-if="item.viewStatus">
+                                        <sw-color-badge variant="success"></sw-color-badge>
+                                    </template>
+                                </template> 
+                            {% endblock %}
+
+                            {% block qa_question_list_grid_column_email %}
+                                <template #column-customer.email="{ item }">
+                                    {{item.customer.email}}
+                                </template>
+                            {% endblock %}
+                            
+                            {% block qa_question_list_grid_column_customer_name %}
+                                {% block qa_question_list_grid_column_customer %}
+                                    <template #preview-customer.firstName="{ item, compact }">
+                                        <template v-if="item.customer">
+                                            {% block qa_question_list_grid_customer_name_avatar %}
+                                                <sw-avatar
+                                                    :size="compact ? '32px' : '48px'"
+                                                    :sourceContext="item"
+                                                    :firstName="item.customer.firstName"
+                                                    :lastName="item.customer.lastName">
+                                                </sw-avatar>
+                                            {% endblock %}
+                                        </template>
+                                        <template v-else>
+                                            {% block qa_question_list_grid_customer_name_avatar_guest %}
+                                            <sw-avatar
+                                                :size="compact ? '32px' : '48px'"
+                                                :sourceContext="item"
+                                                :firstName="item.askBy">
+                                            </sw-avatar>
+                                        {% endblock %}
+                                        </template>
+                                    </template>
+                                    <template #column-customer.firstName="{item, compact}">
+                                        <template v-if="item.customer">
+                                            {% block qa_question_list_grid_columns_customer_name_link %}
+                                                <router-link :to="{ name: 'sw.customer.detail', params: { id: item.customerId } }">
+                                                    {{ item.customer.firstName }}, {{ item.customer.lastName }}
+                                                </router-link>
+                                            {% endblock %}
+                                        </template>
+                                        <template v-else>
+                                            {% block qa_question_list_grid_columns_customer_name_link_guest %}
+                                                {{ item.askBy }} 
+                                                <sw-label 
+                                                    appearance="pill"
+                                                    size="small"
+                                                    class="sw-customer-list__metadata-customer-guest-label">
+                                                {{ $tc('sw-customer.list.columnNameGuestLabel') }}
+                                            </sw-label>
+                                        {% endblock %}
+                                        </template>
+                                    </template>
+                                {% endblock %}
+                            {% endblock %}
+
+                            {% block qa_question_list_columns_product_preview %}
+                                <template #preview-product.name="{ item }">
+                                    <sw-media-preview-v2 :source="item.product.cover ? item.product.cover.media : null"></sw-media-preview-v2>
+                                </template>
+                            {% endblock %}
+
+                            {% block qa_question_lsit_column_product_name %}
+                                <template #column-product.name="{ item }">
+                                    <router-link :to="{ name: 'sw.product.detail', params: { id: item.productId } }">
+                                        {{ item.product.name}}
+                                    </router-link>
+                                </template>
+                            {% endblock %}
+
+                            {% block qa_question_list_grid_columns_active %}
+                                <template #column-status="{ item, isInlineEdit }">
+                                    {% block qa_question_list_grid_columns_active_inline_edit %}
+                                        <template v-if="isInlineEdit">
+                                        
+                                        </template>
+                                    {% endblock %}
+
+                                    {% block qa_question_list_grid_columns_active_content %}
+                                        <template v-else>
+                                            <template v-if="item.status">
+                                               {{$tc('qa.question.list.columnStatusApproved')}}
+                                            </template>
+                                            <template v-else>
+                                                {{$tc('qa.question.list.columnStatusDisapproved')}}
+                                            </template> 
+                                        </template>
+                                    {% endblock %}
+                                </template>
+                            {% endblock %}
+
+                            {% block qa_question_list_grid_columns_question_date %}
+                                <template #column-createdAt="{ item }">
+                                    {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                                </template>
+                            {% endblock %}
+                            
+                            <template slot="pagination">
+                                {% block ddms_question_list_grid_pagination %}
+                                    <sw-pagination :page="page"
+                                                   :limit="limit"
+                                                   :total="total"
+                                                   :total-visible="7"
+                                                   @page-change="onPageChange">
+                                    </sw-pagination>
+                                {% endblock %}
+                            </template>
+                        </sw-entity-listing>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </template>
+
+        {% block  wk_daily_deals_list_sidebar %}
+            <sw-sidebar slot="sidebar">
+                {% block  wk_daily_deals_list_sidebar_refresh %}
+                    <sw-sidebar-item
+                    icon="default-arrow-360-left"
+                    :title="$tc('wasDailyDeal.list.titleSidebarItemRefresh')"
+                    @click="onRefresh">
+                    </sw-sidebar-item>
+                {% endblock %}
+            </sw-sidebar>
+        {% endblock %}  
+    </sw-page>
+{% endblock %}

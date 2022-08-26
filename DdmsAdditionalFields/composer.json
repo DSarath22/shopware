@@ -1,0 +1,27 @@
+{
+    "name": "ddms/additonal-fields",
+    "description": "Additional Fields",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "require": {
+    "shopware/core": "*",
+    "shopware/administration": "*",
+    "shopware/storefront": "*"
+    },
+    "autoload": {
+        "psr-4": {
+        "Ddms\\AdditionalFields\\": "src/"
+    }
+    },
+    "extra": {
+        "shopware-plugin-class": "Ddms\\AdditionalFields\\DdmsAdditionalFields",
+        "label": {
+        "en-GB": "Additional Fields for Product and categories",
+        "de-DE": "Zusätzliche Felder für Produkt und Kategorien"
+    },
+    "description": {
+        "en-GB": "Add Custom Field, title and description for product and categories",
+        "de-DE": "Benutzerdefiniertes Feld, Titel und Beschreibung für Produkt und Kategorien hinzufügen"
+    }
+    }
+} 

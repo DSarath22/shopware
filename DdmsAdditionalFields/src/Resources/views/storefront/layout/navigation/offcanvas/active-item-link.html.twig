@@ -1,0 +1,18 @@
+{% sw_extends '@Storefront/storefront/layout/navigation/offcanvas/active-item-link.html.twig' %}
+{% block layout_navigation_offcanvas_navigation_category_headline %}
+    {% if item.customFields['additional_fields_categories_title'] %}
+        {% set name = item.customFields['additional_fields_categories_title'] %}
+    {% else %}
+        {% set name =  item.translated.name %}
+    {% endif %}
+    <a class="nav-item nav-link navigation-offcanvas-headline"
+       href="{{ category_url(item) }}"
+       {% if category_linknewtab(item) %}target="_blank"{% endif %}
+       itemprop="url">
+        {% block layout_navigation_offcanvas_navigation_category_headline_text %}
+            <span itemprop="name">
+                {{ name }}
+            </span>
+        {% endblock %}
+    </a>
+{% endblock %}

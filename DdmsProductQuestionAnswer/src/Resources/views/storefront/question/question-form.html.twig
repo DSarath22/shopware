@@ -1,0 +1,36 @@
+{% block ddms_question_form_detail %}
+    <div id="ask-question" class="collapse ask-question">
+        <form class="question-form col-8"
+        action="" 
+        method="post" 
+        data-form-validation="true"
+        id="qa-question-form"
+        data-form-csrf-handler="true">
+
+            {% block page_product_detail_question_form_csrf %}
+                {{ sw_csrf('frontend.detail.question.save') }}
+            {% endblock %}
+            
+            {% block ddms_question_form_question_detail_field %}
+                <div class="form-group col-8">
+                    <label for="question" class="form-label">
+                        <strong>
+                            {{"question-answer.product-detail.formQuestion.labelQuestion"|trans|sw_sanitize}}
+                        </strong>
+                    </label>
+
+                    <textarea class="form-control" 
+                    rows="3" 
+                    id="question"
+                    name="question"></textarea>
+                </div>
+            {% endblock %}
+
+            {% block ddms_question_form_sumbit_buttom %}
+                <button type="button" class="btn btn-primary submit-btn" @click="submitQuestion()" id="submit{{page.product.id}}" data-original-title='{{"question-answer.product-detail.formQuestion.textButton"|trans}}' data-toggle="tooltip">
+                    {{"question-answer.product-detail.formQuestion.textButton"|trans|sw_sanitize}}
+                </button>
+            {% endblock %}
+        </form>
+    </div>
+{% endblock %}

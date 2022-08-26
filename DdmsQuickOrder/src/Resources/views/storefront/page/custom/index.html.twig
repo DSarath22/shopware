@@ -1,0 +1,137 @@
+{% sw_extends '@Storefront/storefront/page/account/_page.html.twig' %}
+{% block page_account_main_content %}
+  {{parent()}}
+<div class="account-welcome">
+   <h1>{{'ddmsQuickOrder.headingText'|trans}}</h1>
+   <p>{{'ddmsQuickOrder.descriptionText'|trans}}</p>
+</div>
+
+<div class="card">
+   <div class="card-body">
+      <div class="quickorder-tab">
+         <button class="tablinks" onclick="quickorderOption(event, 'file')" id="defaultOpen">{{'ddmsQuickOrder.importTabText'|trans}}</button>
+         <button class="tablinks" onclick="quickorderOption(event, 'manual')">{{'ddmsQuickOrder.manualTabText'|trans}}</button>
+      </div>
+        <div id="file" class="tabcontent">
+          <div class="tabinfo">
+            <ul>
+                <li>- {{'ddmsQuickOrder.tabinfo1li1'|trans}}</li>
+                <li>- {{'ddmsQuickOrder.tabinfo1li2'|trans}}</li>
+            </ul>
+          </div>
+          <div class="cartinfotextbox">
+            <form action="{{path('frontend.quickorder.bulk')}}" method="post">
+              {{ sw_csrf('frontend.quickorder.bulk') }}
+              <textarea id="tablecartrow" name="tableitem" placeholder="Insert table" cols="30" rows="10" class="form-control" onkeyup="validatetextarea(event)"></textarea>
+              <div class="buttonwrapper" >
+                <button id="quickcartbtn" type="submit" class="btn quick-order-btn" disabled="disabled">
+                  {{'ddmsQuickOrder.addToCartText'|trans}}
+                  <span class="theme-next-btn-icon">
+                    {% sw_icon 'arrow-medium-right' style {'pack': 'solid'} %}
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+          
+      </div>
+      <div id="manual" class="tabcontent">
+         <form action="{{path('frontend.account.quick.order')}}" method="post">
+            {{ sw_csrf('frontend.account.quick.order') }}
+            <table class="table table-bordered">
+              <div class="table-manual-heading">{{'ddmsQuickOrder.manualTabText'|trans}}</div>
+              <thead>
+                <th>{{'ddmsQuickOrder.quantityColumn'|trans}}</th>
+                <th>{{'ddmsQuickOrder.articleNumberColumn'|trans}}</th>
+                <th>{{'ddmsQuickOrder.productNameColumn'|trans}}</th>
+              </thead>
+              <tbody>
+                {% for i in 0..10 %}
+                  <tr>
+                    <td class="qty-col"><input type="number" name="product[{{i}}][quantity]" class="form-control" {% if i == 0 %} onkeyup="checkempty(event)" required {% endif %}></td>
+                    <td class="article-no-col"><input type="text" name="product[{{i}}][articleNo]" class="form-control" {% if i == 0 %} onkeyup="checkempty(event)" required {% endif %} onblur="getProductName(event,{{i}})"></td>
+                    <td id="product-name-{{i}}" class="product-name-col"></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <div class="buttonwrapper" >
+              <button type="submit" class="btn quick-order-btn" id="manualcartbtn" disabled="disabled">
+                <span class="quick-cart-txt">{{'ddmsQuickOrder.addToCartText'|trans}}</span>
+                <span class="theme-next-btn-icon">
+                  {% sw_icon 'arrow-medium-right' style {'pack': 'solid'} %}
+                </span>
+              </button>
+            </div>
+         </form>
+      </div>
+      
+   </div>
+</div>
+<script>
+  document.getElementById("defaultOpen").click();
+  function getProductName(evt,index){
+    var productNumber = evt.target.value;
+    if (productNumber) {
+        var xhr = new XMLHttpRequest();  
+        var url = "{{path('frontend.product.name')}}";
+        xhr.open("POST", url);
+        var formData = new FormData();
+        formData.append('productNumber',productNumber);
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            if(this.response){
+              let data = JSON.parse(this.response);
+              if(data) {
+                if(data.variation.length >0) {
+                  var groupOptions = '';
+                  for (let i=0; i<data.variation.length; i++) {
+                      groupOptions += data.variation[i].group+':<span class="product-variant-characteristics-option">'+data.variation[i].option+'</span>';
+                      if (i != data.variation.length-1) {
+                        groupOptions += '|'; 
+                      }
+                  }
+                  let variantOptions = '<div class="ddms-product-name">'+data.productName+'</div><div class="product-variant-characteristics"><div class="product-variant-characteristics-text">'+groupOptions+'</div></div>'
+                  document.getElementById('product-name-'+index).innerHTML =  variantOptions;
+                } else {
+                  document.getElementById('product-name-'+index).innerHTML = '<div class="ddms-product-name">'+data.productName+'</div>';
+                }
+              } else {
+                document.getElementById('product-name-'+index).innerHTML = "{{'ddmsQuickOrder.message.wrongArticleNumber'|trans}}";
+              }
+            }
+          }
+        }
+        xhr.send(formData);
+    }
+  }
+  function quickorderOption(evt, option) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(option).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  function validatetextarea(event) {
+    if(event.target.value.trim().length > 0) {
+      document.getElementById('quickcartbtn').disabled = false;
+    } else {
+      document.getElementById('quickcartbtn').disabled = true;
+    }
+  }
+  function checkempty(event) {
+    console.log(event);
+    if(event.target.value.trim().length > 0) {
+      document.getElementById('manualcartbtn').disabled = false;
+    } else {
+      document.getElementById('manualcartbtn').disabled = true;
+    }
+  }
+</script>
+{% endblock %}

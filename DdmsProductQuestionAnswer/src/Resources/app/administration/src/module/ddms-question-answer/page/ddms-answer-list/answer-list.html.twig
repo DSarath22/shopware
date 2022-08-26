@@ -1,0 +1,157 @@
+{% block ddms_question_detail %}
+    <sw-page>
+        {% block ddms_question_list_grid_columns_search_bar %}
+            <template #search-bar>
+                <sw-search-bar :initialSearchType="$tc('qa.general.searchAnswerTitle')"
+                :initialSearch="term"
+                @search="onSearch">
+                </sw-search-bar>
+            </template>
+        {% endblock %}
+
+        {% block ddms_question_detail_smart_bar_header %}
+            <template #smart-bar-header>
+                {% block ddms_question_detail_smart_bar_header_title %}
+                    <h2>
+                        {% block ddms_question_detail_smart_bar_header_title_text %}
+                            {{ $tc('sw-settings.index.title') }} <sw-icon name="small-arrow-medium-right" small></sw-icon> 
+                            {{$tc('qa.question.list.textQuestion')}}  <sw-icon name="small-arrow-medium-right" small></sw-icon> 
+                            {{ $tc('qa.question.detail.titleDetail') }}
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        <template slot="content">
+            {% block qa_question_detail_content %}
+                <sw-card-view class="question">
+                    <sw-card v-if="total != 0" 
+                    :title="$tc('qa.question.detail.cardTitleAnswer')" :isLoading="isLoading">
+                        <sw-entity-listing
+                            v-if="answers"
+                            :items="answers"
+                            :columns="answerColumns"
+                            :fullPage="false"
+                            :showSelection="true"
+                            :repository="answerRepository"
+                            :isLoading="isLoading">
+
+                            {% block ddms_question_detail_grid_columns_active %}
+                                <template #column-status="{ item, isInlineEdit }">
+                                    {% block ddms_question_detail_grid_columns_active_inline_edit %}
+                                        <template v-if="isInlineEdit">
+                                        
+                                        </template>
+                                    {% endblock %}
+
+                                    {% block ddms_question_detail_grid_columns_active_content %}
+                                        <template v-else>
+                                            <template v-if="item.status">
+                                                {{$tc('qa.question.detail.columnStatusApproved')}}
+                                            </template>
+                                            <template v-else>
+                                                {{$tc('qa.question.detail.columnStatusDisapproved')}}
+                                            </template>
+                                           
+                                        </template>
+                                    {% endblock %}
+                                </template>
+                            {% endblock %}
+
+                            {% block ddms_question_detail_grid_columns_email %}
+                                <template #column-email="{ item}">
+                                    {% block ddms_question_detail_grid_columns_email_inline_edit %}
+                                        <template v-if="item.email">
+                                            {{item.email}}
+                                        </template>
+                                    {% endblock %}
+
+                                    {% block ddms_question_detail_grid_columns_email_content %}
+                                        <template v-else>
+                                           -
+                                        </template>
+                                    {% endblock %}
+                                </template>
+                            {% endblock %}
+
+                            {% block ddms_question_detail_grid_columns_order_date %}
+                                <template #column-createdAt="{ item }">
+                                    {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                                </template>
+                            {% endblock %}
+                            
+                            {% block ddms_question_detail_grid_action_modals %}
+                                <template #action-modals="{ item }">
+                                    {% block ddms_question_detail_delete_modal %}
+                                        <sw-modal v-if="showDeleteModal === item.id"
+                                                  @modal-close="onCloseDeleteModal"
+                                                  :title="$tc('qa.question.detail.modalTitleDelete')"
+                                                  variant="small">
+                                            {% block ddms_question_detail_delete_modal_confirm_delete_text %}
+                                                <p>
+                                                    {{ $tc('qa.question.detail.textDeleteConfirm', 0, { name: `${item.answerBy}` }) }}
+                                                </p>
+                                            {% endblock %}
+
+                                            {% block ddms_question_detail_delete_modal_footer %}
+                                                <template #modal-footer>
+                                                    {% block ddms_question_detail_delete_modal_cancel %}
+                                                        <sw-button @click="onCloseDeleteModal" size="small">
+                                                            {{ $tc('qa.question.detail.buttonCancel') }}
+                                                        </sw-button>
+                                                    {% endblock %}
+
+                                                    {% block ddms_question_detail_delete_modal_confirm %}
+                                                        <sw-button @click="onConfirmDelete(item.id)" variant="primary" size="small">
+                                                            {{ $tc('qa.question.detail.buttonDelete') }}
+                                                        </sw-button>
+                                                    {% endblock %}
+                                                </template>
+                                            {% endblock %}
+                                        </sw-modal>
+                                    {% endblock %}
+                                </template>
+                            {% endblock %}
+                            <template #pagination>
+                                {% block ddms_question_detail_grid_pagination %}
+                                    <sw-pagination :page="page"
+                                                   :limit="limit"
+                                                   :total="total"
+                                                   :total-visible="7"
+                                                   @page-change="onPageChange"
+                                                   :steps="[1]">
+                                    </sw-pagination>
+                                {% endblock %}
+                            </template>
+                        </sw-entity-listing>
+                    </sw-card>
+
+                    <sw-card :isLoading="isLoading">
+                        <sw-text-field :copyable="false" :copyableTooltip="false"
+                        :placeholder="$tc('qa.question.detail.placeholderAnswerBy')" 
+                        v-model="answerBy"
+                        :label="$tc('qa.question.detail.labelAnswerBy')"
+                        required>
+                            
+                        </sw-text-field>
+
+                        <sw-textarea-field type="textarea" :placeholder="$t('qa.question.detail.placeholderAnswer')" :label="$tc('qa.question.detail.labelAnswer')" v-model="answer"
+                        required
+                        >
+                        </sw-textarea-field>
+
+                        <sw-button-process
+                            :isLoading="isLoading"
+                            :processSuccess="processSuccess"
+                            variant="primary"
+                            @process-finish="saveFinish"
+                            @click="onClickSave" >
+                            {{ $t('qa.question.detail.textSubmit') }}
+                        </sw-button-process>
+                    </sw-card>
+                </sw-card-view>
+            {% endblock %}
+        </template>
+    </sw-page>    
+{% endblock %}

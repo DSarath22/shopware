@@ -1,0 +1,31 @@
+{
+    "ddmsQuickOrder": {
+        "headingText": "Schnelle Bestellung",
+        "descriptionText": "Hier können Sie schnell Produkte einzeln oder als Liste, CSV-Liste oder Excel-Tabelle bestellen",
+        "importTabText": "Import aus Tabellen (z.B. Excel)",
+        "manualTabText": "Tabelee manuell eingeben",
+        "tab1CardTitle": "Fügen Sie über diese Tabelle mehrere Artikel gleichzeitig dem Warenkorb hinzu",
+        "tab1CardDescription": "Sie können die Beispieldatei hier herunterladen",
+        "tab2CardTitle": "Fugen sie uber diese tabelle  mehrere Artikel  gleichzeitig dem Warenkorb hinzu",
+        "tab2CardDescription": "Geben Sie die Menge und Artikelnummer (unsere, Ihre oder eine Artikelnummer eines anderen Lieferanten) in die entsprechenden Felder ein",
+        "importFileLabel": "Datei importieren",
+        "quantityColumn": "Menge",
+        "articleNumberColumn": "Artikelnummer",
+        "productNameColumn": "Artikelname", 
+        "tabinfo1li1": "Markieren und kopieren Sie mehrere Zeilen aus einer Tabelle und fügen Sie sie in dieses Feld ein",
+        "tabinfo1li2": "Der Online-Shop legt alle Artikel dieser Tabelle in Ihren Warenkorb",   
+        "message": {
+            "indexNotFound": "Der Spaltenname existiert nicht in der Tabelle",
+            "notValidExtension": "Keine gültige Erweiterung",
+            "articleNumberNotFound": "Diese Artikelnummer wurde nicht gefunden",
+            "productAddedSuccess": "Produkt erfolgreich hinzugefügt",
+            "wrongArticleNumber": "Falsche Artikelnummer",
+            "itemNumberMissing": "Keine Artikelnummer eingegeben",
+            "itemNotFound": "Artikel nicht gefunden oder Artikelnummer nicht eindeutig",
+            "parentItem": "Die Artikelnummer ist das übergeordnete Produkt",
+            "successMessage": "Artikel wurden Ihrem Warenkorb erfolgreich hinzugefügt",
+            "invalidFormat": "Ungültiges Datenformat"
+        },
+        "addToCartText": "In den Warenkorb"
+    }
+}

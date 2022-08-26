@@ -1,0 +1,45 @@
+{
+    "question-answer": {
+        "product-detail": {
+            "tabQuestion": "Frage stellen",
+            "formQuestion": {
+                "labelQuestion": "Ihre Frage",
+                "questionError": "Die Frage muss zwischen 1 und 185 Zeichen lang sein!",
+                "labelQuestionDetail": "Beschreibung",
+                "questionDetailError": "Beschreibung nicht mehr als 185 Zeichen!",
+                "textButton": "einreichen",
+                "successMessage": "Vielen Dank für die Übermittlung Ihrer Frage. Die Frage wird jedoch erst sichtbar, wenn wir sie genehmigt haben. Bitte haben Sie Geduld.",
+                "textFormLogin": "Frage stellen",
+                "labelCustomerName": "Dein Name",
+                "labelEmail": "E-Mail-Addresse",
+                "successAutoQuestion": "Vielen Dank für die Übermittlung Ihrer Frage. Die Frage wird genehmigt",
+                "errorQuestion": "Geben Sie die Frage ein",
+                "placeholderSearchQuestion": "Eine Frage haben? Suche nach Frage",
+                "labelCountAnswer": "Antwort (en)",
+                "labelPaginationPrev": "Zurück",
+                "labelPaginationNext": "Nächster",
+                "errorQuestionLimit": "Das Fragezeichen sollte zwischen 1 und 255 liegen",
+                "errorQuestionDetailLimit": "Frage Detailzeichen sollte zwischen 1 und 255 liegen",
+                "requiredLogin": "Bitte melden Sie sich bei Frage an"
+            },
+
+            "formAnswer": {
+                "labelAnswer": "Antworten",
+                "questionError": "Die Antwort muss zwischen 1 und 185 Zeichen enthalten!",
+                "textButton": "einreichen",
+                "successMessage": "Vielen Dank für Ihre Antwort. Die Antwort wird jedoch erst sichtbar, wenn wir sie genehmigt haben. Bitte haben Sie Geduld.",
+                "answerError": "Die Antwort muss zwischen 1 und 185 Zeichen enthalten!",
+                "question": "Q. Q.",
+                "asked": "fragte bei",
+                "answer": "antwortete um",
+                "textFormLogin": "Antworten",
+                "successAutoAnswer": "Vielen Dank für Ihre Antwort. Die Antwort wird genehmigt",
+                "errorAnswer": "Geben Sie die Antwort ein",
+                "noAnswerFound": "Für diese Frage wurde keine Antwort gefunden",
+                "errorAnswerLimit": "Das Antwortzeichen sollte zwischen 1 und 255 liegen",
+                "requiredLogin": "Bitte melden Sie sich bei Answer an",
+                "infoLoginMessage": "Bitte melden Sie sich an, um die Frage zu stellen oder zu beantworten"
+            }
+        }
+    }
+}

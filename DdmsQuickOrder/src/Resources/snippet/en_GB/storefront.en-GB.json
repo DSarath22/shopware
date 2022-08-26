@@ -1,0 +1,31 @@
+{
+    "ddmsQuickOrder": {
+        "headingText": "Quick Order",
+        "descriptionText": "Here you can quick order product individually or as a list, CSV list or Excel table",
+        "importTabText": "Import from file(e.g Excel)",
+        "manualTabText": "Enter manual entry",
+        "tab1CardTitle": "Add products with CSV or Excel file",
+        "tab1CardDescription": "You can download demo file from here",
+        "tab2CardTitle": "Add several items to your basket at one go via this table",
+        "tab2CardDescription": "Enter the quantity and item number (ours, yours or an item number from another supplier) in the corresponding field",
+        "importFileLabel": "Import File",
+        "quantityColumn": "Quantity",
+        "articleNumberColumn": "Article Number",
+        "productNameColumn": "Article Name",
+        "tabinfo1li1": "Mark and copy several rows from a table and paste them into this field",
+        "tabinfo1li2": "The online shop puts all the items in this table into your shopping cart",
+        "message": {
+            "indexNotFound": "Column name does not exist in table",
+            "notValidExtension": "Not a valid extension",
+            "articleNumberNotFound": "This article number was not found",
+            "productAddedSuccess": "Product addedd successfully",
+            "wrongArticleNumber": "Wrong Article Number",
+            "itemNumberMissing": "No item number entered",
+            "itemNotFound": "Item not found or item number not unique",
+            "parentItem": "Item number is parent product",
+            "successMessage": "Items successfully added to your basket",
+            "invalidFormat": "Invalid data format"
+        },
+        "addToCartText": "in the cart"
+    }
+}

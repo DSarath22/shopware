@@ -1,0 +1,10 @@
+{% sw_extends '@Storefront/storefront/layout/navigation/navigation.html.twig' %}
+
+{% block layout_main_navigation_menu_item %}
+    {% if category.customFields['additional_fields_categories_title'] %}
+        {% set name = category.customFields['additional_fields_categories_title'] %}
+    {% else %}
+        {% set name =  category.translated.name %}
+    {% endif %}
+    {{parent()}}
+{% endblock %}

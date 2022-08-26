@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>English</title>
+         <title lang="de-DE">German Titel</title>
+        <input-field type='text'>
+            <name>name</name>
+            <label>Name</label>
+            <defaultValue>sarath</defaultValue>
+            <copyable>true</copyable>
+        </input-field>
+    </card>
+    <card>
+        <title>Select field</title>
+         <title lang="de-DE">German Titel</title>
+        <input-field type='single-select'>
+            <name>list</name>
+            <option>
+            <id>sar</id>
+            <name>sarath</name>
+            </option>
+            <option>
+            <id>kum</id>
+            <name>kumar</name>
+            </option>
+
+        </input-field>
+    </card>
+</config>

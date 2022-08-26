@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Ddms\ProductQuestionAnswer\Core\Content\Answer\AnswerDefinition">
+            <tag name="shopware.entity.definition" entity="ddms_qa_answer" />
+        </service>
+
+        <service id="Ddms\ProductQuestionAnswer\Core\Content\Question\QuestionDefinition">
+            <tag name="shopware.entity.definition" entity="ddms_qa_question" />
+        </service>
+
+        <service id="Ddms\ProductQuestionAnswer\Controller\Storefront\QuestionController">
+            <tag name="controller.service_arguments" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="Ddms\ProductQuestionAnswer\Service\ProductQuestionService" />
+        </service>
+
+         <service id="Ddms\ProductQuestionAnswer\Controller\Storefront\AnswerController">
+            <tag name="controller.service_arguments" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="Ddms\ProductQuestionAnswer\Service\ProductAnswerService" />
+        </service>
+
+        <service id="Ddms\ProductQuestionAnswer\Service\ProductAnswerService">
+            <argument type="service" id="ddms_qa_answer.repository" />
+            <argument type="service" id="Ddms\ProductQuestionAnswer\Service\ProductQuestionService" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="Ddms\ProductQuestionAnswer\Service\ProductMailService" />
+        </service>
+
+        <service id="Ddms\ProductQuestionAnswer\Service\ProductQuestionService">
+            <argument type="service" id="ddms_qa_question.repository" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="Ddms\ProductQuestionAnswer\Service\ProductMailService" />
+            <argument type="service" id="ddms_qa_answer.repository" />
+            <argument type="service" id="customer.repository" />
+        </service>
+
+        <service id="Ddms\ProductQuestionAnswer\Service\ProductMailService">
+            <argument type="service" id="Shopware\Core\Content\Mail\Service\MailService" />
+            <argument type="service" id="user.repository" />
+            <argument type="service" id="mail_template_type.repository" />
+            <argument type="service" id="mail_template.repository" />
+        </service>
+    </services>
+</container>

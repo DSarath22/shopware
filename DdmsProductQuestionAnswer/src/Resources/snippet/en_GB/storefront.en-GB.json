@@ -1,0 +1,45 @@
+{
+    "question-answer": {
+        "product-detail": {
+            "tabQuestion": "Ask Question",
+            "questionLoginDescription": "Question can only be submitted while being logged in. Please enter your login details below.",
+            "formQuestion": {
+                "labelQuestion": "Your Question",
+                "questionError": "Question must be between 1 to 185 characters!",
+                "labelQuestionDetail": "Description",
+                "questionDetailError": "Description not more than 185 characters!",
+                "textButton": "Submit",
+                "successMessage": "Thank you for submitting your question. However, the question won't be visible until we have approve it. Please be patient.",
+                "textFormLogin": "Ask Question",
+                "successAutoQuestion": "Thank you for submitting your question. The question is approved",
+                "errorQuestion": "Enter the question",
+                "placeholderSearchQuestion": "Have a question? Search for question",
+                "labelSearchQuestion": "Ask Question",
+                "labelCountAnswer": "Answer(s)",
+                "labelPaginationPrev": "Prev",
+                "labelPaginationNext": "Next",
+                "errorQuestionLimit": "Question character should be between 1 to 255",
+                "errorQuestionDetailLimit": "Question Detail character should be between 1 to 255",
+                "requiredLogin": "Please login to ask Question"
+            },
+
+            "formAnswer": {
+                "labelAnswer": "Answer",
+                "questionError": "Answer must be between 1 to 185 characters!",
+                "textButton": "Submit",
+                "successMessage": "Thank you for submitting your answer. However, the answer won't be visible until we have approve it. Please be patient.",
+                "answerError": "Answer must be between 1 to 185 characters!",
+                "question": "Q.",
+                "asked": "asked at",
+                "answer": "answered at",
+                "textFormLogin": "Answer",
+                "successAutoAnswer": "Thank you for submitting your answer. The answer is approved",
+                "errorAnswer": "Enter the answer",
+                "noAnswerFound": "No answer found for this question",
+                "errorAnswerLimit": "Answer character should be between 1 to 255",
+                "requiredLogin": "Please login to Answer",
+                "infoLoginMessage": "Please login to ask the question or answer the question"
+            }
+        }
+    }
+}

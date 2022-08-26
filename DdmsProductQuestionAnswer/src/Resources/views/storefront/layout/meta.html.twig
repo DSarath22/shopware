@@ -1,0 +1,44 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% block layout_head_javascript_tracking %}
+    {{ parent() }}
+    <style>
+        .pagination li {
+            padding: 0 10px;
+            display: inline-block;
+        }
+        .pagination li.active a {
+            color: black;
+        }
+        .pagination li.disabled a {
+            color: grey;
+        }
+        .pagination li a:focus {
+            outline: none;
+        }
+
+        .answer-pagination li {
+            padding: 0 10px;
+            display: inline-block;
+        }
+        .answer-pagination li.active a {
+            color: black;
+        }
+        .answer-pagination li.disabled a {
+            color: grey;
+        }
+        .answer-pagination li a:focus {
+            outline: none;
+        }
+
+        .answer-pagination {
+            margin-left: 560px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+{% endblock %}

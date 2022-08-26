@@ -1,0 +1,83 @@
+{% block ddms_question_list %}
+    {% set productId = page.product.id %}
+    <div class="card question-list"> 
+        <ul class="list-group list-group-flush">
+            <div v-for="list in questionAnswer" v-if="questionAnswer.length">
+                <div data-toggle="collapse" :data-target='"#question"+list.id'>
+                    <li class="list-group-item col-8 card-title text-justify li-item"><span class="text-danger question-mark-gap"> {{"question-answer.product-detail.formAnswer.question"|trans}} </span> ~list.question~
+                    <span class="card-answer-title">
+                       {{"question-answer.product-detail.formQuestion.labelCountAnswer"|trans}}  ~list.answer.length~ 
+                    </span></li>
+                </div>
+
+                <div :id='"question"+list.id' class="collapse col-8 text-justify panel-collapse in question-content">
+                    <div role="alert" class="col-sm-10 alert alert-info question-alert">
+                        <div class="alert-content-container question-container">
+                            <p class="alert-content question-detail">
+                                ~list.question~
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div v-if="list.answer"  v-for="answer in list.answer" role="alert" class="col-sm-9 alert alert-info answer-content">
+                        <div class="alert-content-container question-container"> 
+                            <p class="alert-content answer-detail">
+                                ~answer.answer~
+                            </p>
+                        </div>
+                    </div> 
+                    
+                    <div v-if="!list.answer.length">
+                        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                            type: "danger",
+                            content: "question-answer.product-detail.formAnswer.noAnswerFound"|trans|sw_sanitize
+                        } %} 
+                    </div>
+                    <paginate
+                        v-if="list.answerTotal && list.answerTotal - 1"
+                        v-model="answerPage"
+                        :page-count="list.answerTotal"
+                        :click-handler="answerPaginate"
+                        prev-text="{{"question-answer.product-detail.formQuestion.labelPaginationPrev"|trans}}"
+                        next-text="{{"question-answer.product-detail.formQuestion.labelPaginationNext"|trans}}"
+                        :container-class="'answer-pagination'">
+                    </paginate>  
+
+                    {% block ddms_answer_form %}
+                        <button type="button" class="btn btn-primary answer-form-btn"  
+                        data-toggle="collapse"
+                       
+                        {% if context.customer %}
+                            :data-target='"#answer"+list.id'
+                            title='{{"question-answer.product-detail.formAnswer.textFormLogin"|trans}}'
+                        {% else %}
+                            title='{{"question-answer.product-detail.formAnswer.requiredLogin"|trans}}'
+                        {% endif %}
+                        aria-expanded="false"
+                        aria-controls="review-form review-list" 
+                       >    
+                            {% if context.customer %}
+                                {{"question-answer.product-detail.formAnswer.textFormLogin"|trans}}
+                            {% else %}
+                                {{"question-answer.product-detail.formAnswer.requiredLogin"|trans}}
+                            {% endif %}
+                        </button> 
+
+                        <div class="collapse answer-form-collapse" :id='"answer"+list.id'>
+                            {% sw_include '@Webkul/storefront/question/answer-form.html.twig' %}
+                        </div>               
+                    {% endblock %}
+                </div>
+            </div>
+        </ul>
+    </div>
+    <paginate
+        v-if="pageCount && pageCount - 1"
+        v-model="page"
+        :page-count="pageCount"
+        :click-handler="paginate"
+        prev-text="{{"question-answer.product-detail.formQuestion.labelPaginationPrev"|trans}}"
+        next-text="{{"question-answer.product-detail.formQuestion.labelPaginationNext"|trans}}"
+        :container-class="'pagination'">
+    </paginate>
+{% endblock %}

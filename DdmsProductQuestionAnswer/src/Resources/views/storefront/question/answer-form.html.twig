@@ -1,0 +1,35 @@
+{% block ddms_answer_form_detail %}
+    <form class="answer-form"
+        action=""
+        method="post"
+        data-form-validation="true"
+        id="qa-answer-form"
+        data-form-csrf-handler="true" >
+
+        {% block page_product_detail_answer_form_csrf %}
+            {{ sw_csrf('frontend.detail.answer.save') }}
+        {% endblock %}
+        
+        {% block ddms_answer_form_answer_field %}
+            <div class="form-group col-8">
+                <span class="star">*</span>
+                <label for="answerDetail" class="form-label">
+                    <strong>
+                        {{"question-answer.product-detail.formAnswer.labelAnswer"|trans|sw_sanitize}}
+                    </strong>
+                </label>
+
+                <textarea class="form-control" 
+                rows="3"
+                :id='"answerDetail"+list.id'
+                name="answerDetail" ></textarea>
+            </div>
+        {% endblock %}
+
+        {% block ddms_answer_form_sumbit_buttom %}
+            <button type="button" class="btn btn-primary submit-button" @click="submitAnswer(list.id)" title='{{"question-answer.product-detail.formAnswer.textButton"|trans}}' data-toggle="tooltip">
+                {{"question-answer.product-detail.formAnswer.textButton"|trans|sw_sanitize}}
+            </button>
+        {% endblock %}
+    </form>
+{% endblock %}

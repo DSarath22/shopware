@@ -1,0 +1,51 @@
+{
+    "qa": {
+        "general": {
+            "mainMenuItemGeneral": "Product Qusestion Answer",
+            "searchQuestionTitle": "Questions"
+        },
+        "question": {
+            "list": {
+                "columnQuestion": "Question",
+                "columnProductName": "Product Name",
+                "columnCustomerName": "Customer Name",
+                "columnCustomerEmail": "Customer Email",
+                "columnDate": "Created Date",
+                "columnStatus": "Status",
+                "textQuestion": "Question list",
+                "columnStatusApproved": "Approve",
+                "columnStatusDisapproved": "Reject",
+                "titleToviewDetail": "Click on the question to view the question detail"
+            },
+            "detail": {
+                "titleDetail": "Product Question Answer",
+                "columnAnswer": "Answer",
+                "columnAnswerBy": "Answer By",
+                "columnEmail": "Email",
+                "columnDate": "Date",
+                "columnStatus": "Status",
+                "buttonDelete": "Delete",
+                "buttonCancel": "Cancel",
+                "textDeleteConfirm": "Are you sure to delete the answer of \"{name}\" ?",
+                "modalTitleDelete":"Delete Answer",
+                "cardTitleAnswer": "Answer",
+                "labelAnswerBy": "Answer By",
+                "placeholderAnswerBy": "Enter the name",
+                "labelAnswer": "Answer",
+                "placeholderAnswer": "Enter the answer",
+                "textSubmit": "Submit",
+                "errorTitle": "Error",
+                "errorAnswerByMessage": "Enter the name",
+                "errorAnswerMessage": "Enter the Answer",
+                "errorAnswerLimit": "Answer must be between 1 and 185 character",
+                "errorAnswerByLimit": "Name must be between 1 and 185 charachter",
+                "successTitle": "Success",
+                "successMessage": "Answer is submitted",
+                "errorMessage": "Answer is not saved",
+                "successMessageInline": "Answer is saved",
+                "columnStatusApproved": "Approved",
+                "columnStatusDisapproved": "Disapproved"
+            }
+        }
+    }
+}

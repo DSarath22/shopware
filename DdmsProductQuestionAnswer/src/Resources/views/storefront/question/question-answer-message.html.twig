@@ -1,0 +1,57 @@
+{% block ddms_qa_success_error_message %}
+    <div id="autoQuestionMessage" class="display-none">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "success",
+            content: "question-answer.product-detail.formQuestion.successAutoQuestion"|trans|sw_sanitize
+        } %}               
+    </div>
+
+    <div id="questionMessage" class="display-none">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "success",
+            content: "question-answer.product-detail.formQuestion.successMessage"|trans|sw_sanitize
+        } %} 
+    </div>
+
+        <div id="autoAnswerMessage" class="display-none">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "success",
+            content: "question-answer.product-detail.formAnswer.successAutoAnswer"|trans|sw_sanitize
+        } %}               
+    </div>
+
+    <div id="answerMessage" class="display-none">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "success",
+            content: "question-answer.product-detail.formAnswer.successMessage"|trans|sw_sanitize
+        } %} 
+    </div>
+
+    <div id="errorQuestion" class="display-none">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "danger",
+            content: "question-answer.product-detail.formQuestion.errorQuestion"|trans|sw_sanitize
+        } %}
+    </div>
+
+        <div id="errorAnswer" class="display-none">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "danger",
+            content: "question-answer.product-detail.formAnswer.errorAnswer"|trans|sw_sanitize
+        } %}
+    </div>
+
+    <div id="errorQuestionLimit" class="display-none">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "danger",
+            content: "question-answer.product-detail.formQuestion.errorQuestionLimit"|trans|sw_sanitize
+        } %}
+    </div>
+
+    <div id="errorAnswerLimit" class="display-none">
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: "danger",
+            content: "question-answer.product-detail.formAnswer.errorAnswerLimit"|trans|sw_sanitize
+        } %}
+    </div>
+{% endblock %}

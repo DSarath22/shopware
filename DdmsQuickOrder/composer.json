@@ -1,0 +1,34 @@
+{
+    "name": "ddms/quick-order",
+    "description": "Add multiple items with quantity and product number at the same time",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Ddms",
+            "role": "Manufacturer"
+        }
+    ],
+    "require": {
+        "shopware/core": "*",
+        "shopware/administration": "*",
+        "shopware/storefront": "*"
+    },
+    "type": "shopware-platform-plugin",
+    "autoload": {
+        "psr-4": {
+            "Ddms\\QuickOrder\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Ddms\\QuickOrder\\DdmsQuickOrder",
+        "label": {
+            "en-GB": "Quick Order",
+            "de-DE": "Schnelle Bestellung"
+        },
+        "description": {
+            "en-GB": "Add multiple items with quantity and product number at the same time",
+            "de-DE": "Add multiple items with quantity and product number at the same time"
+        }
+    }
+}

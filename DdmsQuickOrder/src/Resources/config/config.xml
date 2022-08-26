@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title lang="en-GB">General Configuration</title>
+        <title lang="de-DE">Allgemeine Konfiguration</title>
+        <input-field type="bool">
+            <name>status</name>
+            <label lang="de-DE">Aktiver Status</label>
+            <label lang="en-GB">Active Status</label>
+        </input-field>
+     </card>
+</config>
