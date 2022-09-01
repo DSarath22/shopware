@@ -1,0 +1,9 @@
+{% extends "@Storefront/storefront/base.html.twig" %} {% block base_main %}
+<h2>Assets Files</h2>
+<img
+  src="{{ asset('bundles/cgsaudiosite/carousel-3.jpg', 'asset') }}"
+  alt="Carousel-img"
+/>
+<div>{% sw_icon 'filled' style { 'size': '1em', 'pack': 'default'} %}</div>
+{{ parent() }}
+{% endblock %}

@@ -13,17 +13,9 @@ use \Shopware\Core\Checkout\Cart\CartDataCollectorInterface;
 use Shopware\Core\Checkout\Cart\LineItem\CartDataCollection;
 use Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator;
 use Shopware\Core\Checkout\Cart\Price\Struct\QuantityPriceDefinition;
-use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsAnyFilter;
 
 class PriceOverwrite implements CartDataCollectorInterface, CartProcessorInterface
 {
-
-    /**
-     * @var EntityRepositoryInterface
-     */
-    private $productRepository;
     /**
      * @var QuantityPriceCalculator
      */
@@ -32,7 +24,6 @@ class PriceOverwrite implements CartDataCollectorInterface, CartProcessorInterfa
 
     public function __construct(QuantityPriceCalculator $calculator)
     {
-        // $this->productRepository = $productRepository;
         $this->calculator = $calculator;
     }
     public function collect(CartDataCollection $data, Cart $original, SalesChannelContext $context, CartBehavior $behavious): void
@@ -43,22 +34,15 @@ class PriceOverwrite implements CartDataCollectorInterface, CartProcessorInterfa
         if (empty($filtered)) {
             return;
         }
-        // $criteria = new Criteria();
-        // $criteria->addFilter(new EqualsAnyFilter('productId', $filtered));
-        // $prices = 222;
-        // dump($prices);
-        // die;
         foreach ($filtered as $id) {
+            $shoe = "price-overwrite-035a3429045e4fedbaaef71b887e0723";
             $key = $this->buildKey($id);
-            $prices = 222;
-            // $price = null;
-            // foreach ($prices as $current) {
-            //     if ($current->getProductId() === $id) {
-            //         $price = $current;
-            //         break;
-            //     }
-            // }
-            $data->set($key, $prices);
+
+            if ($key == $shoe) {
+                $prices = 300;
+
+                $data->set($key, $prices);
+            }
         }
     }
 
@@ -76,7 +60,7 @@ class PriceOverwrite implements CartDataCollectorInterface, CartProcessorInterfa
     }
     public function process(CartDataCollection $data, Cart $original, Cart $toCalculate, SalesChannelContext $context, CartBehavior $behavious): void
     {
-        $products = $toCalculate->getLineItems()->filterType(LineItem::PRODUCT_LINE_ITEM_TYPE)->getReferenceIds();
+        $products = $toCalculate->getLineItems()->filterType(LineItem::PRODUCT_LINE_ITEM_TYPE);
         foreach ($products as $product) {
             $key = $this->buildKey($product->getReferencedId());
             if (!$data->has($key) || $data->get($key) === null) {
